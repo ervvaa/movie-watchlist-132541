@@ -3,7 +3,7 @@ import {createContext, useContext, useState} from "react";
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-    const[user,setUser] = useState(null)
+    const [user, setUser] = useState(null)
 
     const login = () => {
         setUser({name: 'Erva Shasivari', email: 'shasivarierva@gmail.com'})
@@ -18,7 +18,6 @@ export function AuthProvider({ children }) {
         </AuthContext.Provider>
     </div>
 }
-
 export function useAuth() {
     return useContext(AuthContext)
 }
