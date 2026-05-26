@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { movies as initialMovies } from '../utils/movies'
 
@@ -34,6 +33,14 @@ function MoviesPage() {
         setGenre('')
         setWatched(false)
         setErrors({})
+    }
+
+    const toggleWatched = (id) => {
+        setMovies(movies.map(m => m.id === id ? { ...m, watched: !m.watched } : m))
+    }
+
+    const deleteMovie = (id) => {
+        setMovies(movies.filter(m => m.id !== id))
     }
 
     return (
@@ -96,8 +103,22 @@ function MoviesPage() {
                         <p className="text-gray-600">Director: {movie.director}</p>
                         <p className="text-gray-600">Genre: {movie.genre}</p>
                         <p className="text-gray-600">
-                            Status: {movie.watched ? 'Watched' : 'Not Watched'}
+                            Status: {movie.watched ? '✅ Watched' : '❌ Not Watched'}
                         </p>
+                        <div className="flex gap-2 mt-2">
+                            <button
+                                onClick={() => toggleWatched(movie.id)}
+                                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                            >
+                                Toggle Watched
+                            </button>
+                            <button
+                                onClick={() => deleteMovie(movie.id)}
+                                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
